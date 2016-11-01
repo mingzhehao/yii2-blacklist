@@ -2,15 +2,15 @@
 namespace backend\controllers;
 
 use Yii;
-use yii\web\Controller;
-use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
+use yii\filters\VerbFilter;
+use common\components\keyStorage\FormModel;
 
 /**
  * Site controller
  */
-class SiteController extends Controller
+class SiteController extends \yii\web\Controller
 {
     /**
      * @inheritdoc
@@ -26,7 +26,7 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index'],
+                        'actions' => ['logout', 'index','settings'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -53,24 +53,21 @@ class SiteController extends Controller
         ];
     }
 
-    /**
-     * Displays homepage.
-     *
-     * @return string
-     */
+    public function beforeAction($action)
+    {
+        $this->layout = Yii::$app->user->isGuest ? 'base' : 'common';
+        return parent::beforeAction($action);
+    }
+
+
     public function actionIndex()
     {
         return $this->render('index');
     }
 
-    /**
-     * Login action.
-     *
-     * @return string
-     */
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) {
+        if (!\Yii::$app->user->isGuest) {
             return $this->goHome();
         }
 
@@ -84,15 +81,64 @@ class SiteController extends Controller
         }
     }
 
-    /**
-     * Logout action.
-     *
-     * @return string
-     */
     public function actionLogout()
     {
         Yii::$app->user->logout();
 
         return $this->goHome();
     }
+
+
+    public function actionSettings()
+    {
+        $this->layout = "common";
+        $model = new FormModel([
+            'keys' => [
+                'frontend.maintenance' => [
+                    'label' => Yii::t('backend', 'Frontend maintenance mode'),
+                    'type' => FormModel::TYPE_DROPDOWN,
+                    'items' => [
+                        'disabled' => Yii::t('backend', 'Disabled'),
+                        'enabled' => Yii::t('backend', 'Enabled')
+                    ]
+                ],
+                'backend.theme-skin' => [
+                    'label' => Yii::t('backend', 'Backend theme'),
+                    'type' => FormModel::TYPE_DROPDOWN,
+                    'items' => [
+                        'skin-black' => 'skin-black',
+                        'skin-blue' => 'skin-blue',
+                        'skin-green' => 'skin-green',
+                        'skin-purple' => 'skin-purple',
+                        'skin-red' => 'skin-red',
+                        'skin-yellow' => 'skin-yellow'
+                    ]
+                ],
+                'backend.layout-fixed' => [
+                    'label' => Yii::t('backend', 'Fixed backend layout'),
+                    'type' => FormModel::TYPE_CHECKBOX
+                ],
+                'backend.layout-boxed' => [
+                    'label' => Yii::t('backend', 'Boxed backend layout'),
+                    'type' => FormModel::TYPE_CHECKBOX
+                ],
+                'backend.layout-collapsed-sidebar' => [
+                    'label' => Yii::t('backend', 'Backend sidebar collapsed'),
+                    'type' => FormModel::TYPE_CHECKBOX
+                ]
+            ]
+        ]);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('alert', [
+                'body' => Yii::t('backend', 'Settings was successfully saved'),
+                'options' => ['class' => 'alert alert-success']
+            ]);
+            return $this->refresh();
+        }
+
+        return $this->render('settings', ['model' => $model]);
+    }
+
+
 }
