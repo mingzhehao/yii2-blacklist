@@ -1,4 +1,5 @@
 {
+    "//": "This is comment 1",
     "name": "yiisoft/yii2-app-advanced",
     "description": "Yii 2 Advanced Project Template",
     "keywords": ["yii2", "framework", "advanced", "project template"],
@@ -17,6 +18,17 @@
         "php": ">=5.4.0",
         "yiisoft/yii2": ">=2.0.6",
         "yiisoft/yii2-bootstrap": "*",
+
+        "dmstr/yii2-adminlte-asset": "2.*",
+        "bower-asset/admin-lte": "^2.0",
+        "bower-asset/font-awesome": "^4.0",
+        "bower-asset/html5shiv": "^3.0",
+        "bower-asset/jquery-slimscroll": "^1.3",
+        "bower-asset/flot": "^0.8",
+        "yiisoft/yii2-jui": "^2.0.0",
+        "yiisoft/yii2-redis": "^2.0",
+        "mdmsoft/yii2-admin": "~2.0",
+
         "yiisoft/yii2-swiftmailer": "*"
     },
     "require-dev": {
