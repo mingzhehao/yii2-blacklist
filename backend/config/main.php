@@ -94,8 +94,6 @@ return [
              * 3 在结合对应控制的accessControl
              */
             'site/*',
-            'rbac/*',
-            'admin/*',
             'timeline-event/*',
             'User/*',
         ]
