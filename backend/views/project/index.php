@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel common\models\ProjectSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Projects';
+$this->title = '项目管理';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="project-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Project', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('项目创建', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -24,15 +24,29 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
             'name',
             'appid',
             'appkey',
-            'status',
+            [
+                'attribute' => 'status',
+                'value'     => function($data){
+                    if($data->status == 1)
+                        return "活跃";
+                    else
+                        return "封禁";
+                },
+                'filter'    => [
+                        1  => '活跃',//key 0  为传递到后台搜索值，值为对外显示值
+                        0   => '封禁',
+                   ],  
+            ],
             // 'desc',
             // 'belong_uid',
-            // 'created_at',
-            // 'updated_at',
+            [   
+                'attribute' => 'created_at', 
+                'format' => 'text',
+                'value' => function($data){return date("Y-m-d H:i:s",($data->created_at));},
+            ],  
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Blacklist */
 
-$this->title = 'Update Blacklist: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Blacklists', 'url' => ['index']];
+$this->title = '更新: ' . $model->id;
+$this->params['breadcrumbs'][] = ['label' => '黑名单管理', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = '更新';
 ?>
 <div class="blacklist-update">
 

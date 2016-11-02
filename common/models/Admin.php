@@ -88,4 +88,15 @@ class Admin extends \common\models\CustomActiveRecord
         return parent::beforeSave($insert);
     }
 
+    //获取应用列表
+    public static function getUserList()
+    {
+        $models = self::find()->all();
+        $provider = [];
+        foreach($models as $item) {
+            $provider[$item->primaryKey] = $item->username;
+        }
+        return $provider;
+    }
+
 }

@@ -13,7 +13,7 @@ use Yii;
  * @property integer $created_at
  * @property integer $updated_at
  */
-class Blacklist extends \yii\db\ActiveRecord
+class Blacklist extends \common\models\CustomActiveRecord
 {
     /**
      * @inheritdoc
@@ -29,7 +29,7 @@ class Blacklist extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['appid', 'content', 'created_at', 'updated_at'], 'required'],
+            [['appid', 'content'], 'required'],
             [['appid', 'created_at', 'updated_at'], 'integer'],
             [['content'], 'string', 'max' => 20],
         ];
@@ -42,10 +42,10 @@ class Blacklist extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'appid' => 'Appid',
-            'content' => 'Content',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'appid' => '应用ID',
+            'content' => '参数',
+            'created_at' => '创建时间',
+            'updated_at' => '更新时间',
         ];
     }
 }

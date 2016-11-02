@@ -2,12 +2,13 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use common\models\Project;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\BlacklistSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Blacklists';
+$this->title = '黑名单管理';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="blacklist-index">
@@ -16,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Blacklist', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('黑名单添加', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -24,13 +25,22 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'appid',
+            [
+                'attribute' => 'appid',
+                'value'     => function($data){
+                    $projectList = Project::getProjectList();
+                    return $projectList[$data->appid];
+                },
+                'filter'    => $projectList = Project::getProjectList(),
+            ],
             'content',
-            'created_at',
-            'updated_at',
+            [   
+                'attribute' => 'created_at', 
+                'format' => 'text',
+                'value' => function($data){return date("Y-m-d H:i:s",($data->created_at));},
+            ],  
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn', 'header' => '操作']
         ],
     ]); ?>
 </div>

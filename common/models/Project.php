@@ -17,7 +17,7 @@ use Yii;
  * @property integer $created_at
  * @property integer $updated_at
  */
-class Project extends \yii\db\ActiveRecord
+class Project extends \common\models\CustomActiveRecord
 {
     /**
      * @inheritdoc
@@ -33,7 +33,7 @@ class Project extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'appid', 'appkey', 'desc', 'belong_uid', 'created_at', 'updated_at'], 'required'],
+            [['name','desc'], 'required'],
             [['appid', 'status', 'belong_uid', 'created_at', 'updated_at'], 'integer'],
             [['name', 'appkey'], 'string', 'max' => 64],
             [['desc'], 'string', 'max' => 255],
@@ -48,14 +48,82 @@ class Project extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'appid' => 'Appid',
-            'appkey' => 'Appkey',
-            'status' => 'Status',
-            'desc' => 'Desc',
-            'belong_uid' => 'Belong Uid',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'name' => '项目名称',
+            'appid' => '应用ID',
+            'appkey' => '应用KEY',
+            'status' => '应用状态',
+            'desc' => '应用描述',
+            'belong_uid' => '所属用户',
+            'created_at' => '创建时间',
+            'updated_at' => '更新时间',
         ];
     }
+
+    public function beforeSave($insert)
+    {
+        if($this->isNewRecord)
+        {   
+            $this->appid  = $this->getAppId();
+            $this->appkey = $this->getAppSecret();
+        }   
+        else
+        {   
+            $this->updated_at=time();
+        } 
+        return parent::beforeSave($insert);
+    }
+
+    /**
+     * 获取应用appId
+     * @param  [type] $appType [description]
+     * @return [type]          [description]
+     */
+    private function getAppId($appType = "web")
+    {
+        $time = time();
+        $rand = rand(1,1000);
+        $crc = crc32($time.$appType.$rand);
+        return sprintf("%u", $crc);
+    }
+
+    /**
+     * 获取应用appSecret
+     * @param  [type] $appType [description]
+     * @return [type]          [description]
+     */
+    private function getAppSecret($appType = "webKey")
+    {
+        $time = time();
+        $rand = rand(1,1000);
+        $md5 = md5($time.$appType.$rand);
+        return $md5;
+    }
+    
+    /**
+     * 获取应用状态
+     */
+    public static function getStatusList()
+    {
+        return array(
+            1 => "可用",
+            0 => "不可用",
+        );
+    }
+
+    //获取应用列表
+    public static function getProjectList()
+    {
+        if( Yii::$app->user->can('administrator') ){
+            $models = self::find()->all();
+        }
+        else {
+            $models = self::find(['id' => $uid ])->all();
+        }
+        $provider = [];
+        foreach($models as $item) {
+            $provider[$item->appid] = $item->name;
+        }
+        return $provider;
+    }
+
 }
