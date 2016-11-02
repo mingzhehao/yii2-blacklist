@@ -41,7 +41,13 @@ class BlacklistSearch extends Blacklist
      */
     public function search($params)
     {
-        $query = Blacklist::find();
+        $uid = Yii::$app->user->id;
+        if( ! Yii::$app->user->can('administrator') ){
+            $query = Blacklist::find()->leftJoin("project","blacklist.appid = project.appid")->where("project.belong_uid = $uid");      
+        }else {
+            $query = Blacklist::find();
+        }
+        //var_dump($query->createCommand()->getSql());exit;
 
         // add conditions that should always apply here
 

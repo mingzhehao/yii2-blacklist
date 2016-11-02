@@ -114,11 +114,12 @@ class Project extends \common\models\CustomActiveRecord
     //获取应用列表
     public static function getProjectList()
     {
+        $uid = Yii::$app->user->id;
         if( Yii::$app->user->can('administrator') ){
             $models = self::find()->all();
         }
         else {
-            $models = self::find(['id' => $uid ])->all();
+            $models = self::find()->where(['belong_uid' => $uid ])->all();
         }
         $provider = [];
         foreach($models as $item) {

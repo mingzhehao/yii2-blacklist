@@ -42,6 +42,9 @@ class ProjectSearch extends Project
     public function search($params)
     {
         $query = Project::find();
+        if( ! Yii::$app->user->can('administrator') ){
+            $query->andWhere(['belong_uid'=>Yii::$app->getUser()->getId()]);
+        }
 
         // add conditions that should always apply here
 

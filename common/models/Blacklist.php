@@ -48,4 +48,10 @@ class Blacklist extends \common\models\CustomActiveRecord
             'updated_at' => '更新时间',
         ];
     }
+
+    public function getProject()
+    {
+        return $this->hasOne(Project::className(), ['appid'=>'appid']);
+    }
+
 }
