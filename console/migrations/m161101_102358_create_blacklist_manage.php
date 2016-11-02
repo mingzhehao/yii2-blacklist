@@ -11,7 +11,7 @@ class m161101_102358_create_blacklist_manage extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
 
-        $this->createTable('{{%blacklist_manage}}', [
+        $this->createTable('{{%blacklist}}', [
             'id' => $this->primaryKey(),
             'appid' => $this->integer()->notNull(),
             'content' => $this->string(20)->notNull()->comment("黑名单(ip or uid)"),
@@ -22,8 +22,7 @@ class m161101_102358_create_blacklist_manage extends Migration
 
     public function down()
     {
-        $this->dropTable('{{%blacklist_manage}}');
-        return false;
+        $this->dropTable('{{%blacklist}}');
     }
 
 }

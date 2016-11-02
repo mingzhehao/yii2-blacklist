@@ -11,7 +11,7 @@ class m161101_100314_create_project_manage extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
 
-        $this->createTable('{{%project_manage}}', [
+        $this->createTable('{{%project}}', [
             'id' => $this->primaryKey(),
             'name' => $this->string(64)->notNull(),
             'appid' => $this->integer()->notNull()->unique(),
@@ -26,7 +26,7 @@ class m161101_100314_create_project_manage extends Migration
 
     public function down()
     {
-        $this->dropTable('{{%project_manage}}');
+        $this->dropTable('{{%project}}');
     }
 
     /*
