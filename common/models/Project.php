@@ -83,7 +83,8 @@ class Project extends \common\models\CustomActiveRecord
         $time = time();
         $rand = rand(1,1000);
         $crc = crc32($time.$appType.$rand);
-        return sprintf("%u", $crc);
+        $appid = sprintf("%u", $crc);
+        return substr($appid,0,9);
     }
 
     /**
