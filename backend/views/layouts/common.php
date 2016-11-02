@@ -163,7 +163,9 @@ else
                             'icon'=>'<i class="fa fa-edit"></i>',
                             'options'=>['class'=>'treeview'],
                             'items'=>[
-                                ['label' => '用户管理', 'icon' => '<i class="fa fa-dashboard"></i>', 'url' => ['/admin/index'],],
+                                ['label' => '用户管理', 'icon' => '<i class="fa fa-cogs"></i>', 'url' => ['/admin/index'],],
+                                ['label' => '项目管理', 'icon' => '<i class="fa fa-cogs"></i>', 'url' => ['/project/index'],],
+                                ['label' => '黑名单管理', 'icon' => '<i class="fa fa-cogs"></i>', 'url' => ['/blacklist/index'],],
                                 ['label' => '个人设置', 'icon' => '<i class="fa fa-user"></i>', 'url' => ['/User/avatar'],],
                             ]
                         ],
