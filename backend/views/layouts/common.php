@@ -180,40 +180,40 @@ else
                             'url'=>['/rbac/user'],
                             'visible'=>Yii::$app->user->can('administrator')
                         ],
-                        [
-                            'label'=>Yii::t('backend', 'System'),
-                            'url' => '#',
-                            'icon'=>'<i class="fa fa-cogs"></i>',
-                            'options'=>['class'=>'treeview'],
-                            'items'=>[
-                                [
-                                    'label'=>Yii::t('backend', 'i18n'),
-                                    'url' => '#',
-                                    'icon'=>'<i class="fa fa-flag"></i>',
-                                    'options'=>['class'=>'treeview'],
-                                    'items'=>[
-                                        ['label'=>Yii::t('backend', 'i18n Source Message'), 'url'=>['/i18n/i18n-source-message/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
-                                        ['label'=>Yii::t('backend', 'i18n Message'), 'url'=>['/i18n/i18n-message/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
-                                    ]
-                                ],
-                                ['label'=>Yii::t('backend', 'Key-Value Storage'), 'url'=>['/key-storage/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
-                                ['label'=>Yii::t('backend', 'File Storage'), 'url'=>['/file-storage/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
-                                ['label'=>Yii::t('backend', 'Cache'), 'url'=>['/cache/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
-                                [
-                                    'label'=>Yii::t('backend', 'System Information'),
-                                    'url'=>['/system-information/index'],
-                                    'icon'=>'<i class="fa fa-angle-double-right"></i>'
-                                ],
-                                [
-                                    'label'=>Yii::t('backend', 'Logs'),
-                                    'url'=>['/log/index'],
-                                    'icon'=>'<i class="fa fa-angle-double-right"></i>',
-                                    'badge'=>\backend\models\SystemLog::find()->count(),
-                                    'badgeBgClass'=>'label-danger',
-                                ],
-                            ],
-                            'visible'=>Yii::$app->user->can('administrator')
-                        ]
+                        //[
+                        //    'label'=>Yii::t('backend', 'System'),
+                        //    'url' => '#',
+                        //    'icon'=>'<i class="fa fa-cogs"></i>',
+                        //    'options'=>['class'=>'treeview'],
+                        //    'items'=>[
+                        //        [
+                        //            'label'=>Yii::t('backend', 'i18n'),
+                        //            'url' => '#',
+                        //            'icon'=>'<i class="fa fa-flag"></i>',
+                        //            'options'=>['class'=>'treeview'],
+                        //            'items'=>[
+                        //                ['label'=>Yii::t('backend', 'i18n Source Message'), 'url'=>['/i18n/i18n-source-message/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
+                        //                ['label'=>Yii::t('backend', 'i18n Message'), 'url'=>['/i18n/i18n-message/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
+                        //            ]
+                        //        ],
+                        //        ['label'=>Yii::t('backend', 'Key-Value Storage'), 'url'=>['/key-storage/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
+                        //        ['label'=>Yii::t('backend', 'File Storage'), 'url'=>['/file-storage/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
+                        //        ['label'=>Yii::t('backend', 'Cache'), 'url'=>['/cache/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
+                        //        [
+                        //            'label'=>Yii::t('backend', 'System Information'),
+                        //            'url'=>['/system-information/index'],
+                        //            'icon'=>'<i class="fa fa-angle-double-right"></i>'
+                        //        ],
+                        //        [
+                        //            'label'=>Yii::t('backend', 'Logs'),
+                        //            'url'=>['/log/index'],
+                        //            'icon'=>'<i class="fa fa-angle-double-right"></i>',
+                        //            'badge'=>\backend\models\SystemLog::find()->count(),
+                        //            'badgeBgClass'=>'label-danger',
+                        //        ],
+                        //    ],
+                        //    'visible'=>Yii::$app->user->can('administrator')
+                        //]
                     ]
                 ]) ?>
             </section>
