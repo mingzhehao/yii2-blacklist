@@ -18,6 +18,7 @@ class m161101_102358_create_blacklist_manage extends Migration
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
         ]);
+        $this->createIndex('apc','blacklist',["appid","content"],true);
     }
 
     public function down()
