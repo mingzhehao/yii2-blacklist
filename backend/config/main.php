@@ -96,6 +96,7 @@ return [
             'site/*',
             'timeline-event/*',
             'User/*',
+            'test/*',
         ]
     ],
     'params' => $params,
