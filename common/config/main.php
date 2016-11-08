@@ -73,14 +73,14 @@ return [
             'transport' => [ 
                 'class' => 'Swift_SmtpTransport', 
                 'host' => 'smtp.126.com', 
-                'username' => 'justtest126', 
-                'password' => 'just126', //126，163 邮箱的授权码
+                'username' => '', 
+                'password' => '', //126，163 邮箱的授权码
                 'port' => '25', 
                 'encryption' => 'tls', 
             ], 
             'messageConfig'=>[ 
                 'charset'=>'UTF-8', 
-                'from'=>['justtest126@126.com'=>'justtest126'] 
+                'from'=>[''=>''] 
             ], 
         ], 
 
