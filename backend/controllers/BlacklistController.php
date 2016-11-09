@@ -5,7 +5,6 @@ namespace backend\controllers;
 use Yii;
 use common\models\Blacklist;
 use common\models\BlacklistSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
